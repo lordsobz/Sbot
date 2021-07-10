@@ -172,5 +172,8 @@ function nowplaying(messnage, serverQueue) {
 	return message.channel.send(`Now playing: ${serverQueue.songs[0].title}`);
 }
 
+function leave(message, serverQueue){
+    serverQueue.voiceChannel.leave();
+}
 
 client.login(token);
