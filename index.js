@@ -36,6 +36,18 @@ client.on("message", async message => {
   } else if (message.content.startsWith(`${prefix}stop`)) {
     stop(message, serverQueue);
     return;
+  } else if (message.content.startsWith(`${prefix}pause`)) {
+    pause(message, serverQueue);
+    return;
+  } else if (message.content.startsWith(`${prefix}resume`)) {
+    resume(message, serverQueue);
+    return;
+  } else if (message.content.startsWith(`${prefix}nowplaying`)) {
+    nowplaying(message, serverQueue);
+    return;
+  } else if (message.content.startsWith(`${prefix}leave`)) {
+    leave(message, serverQueue);
+    return;
   } else {
     message.channel.send("Command input error! Please re-enter the right syntax!");
   }
