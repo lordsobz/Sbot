@@ -45,9 +45,6 @@ client.on("message", async message => {
   } else if (message.content.startsWith(`${prefix}nowplaying`)) {
     nowplaying(message, serverQueue);
     return;
-  } else if (message.content.startsWith(`${prefix}leave`)) {
-    leave(message, serverQueue);
-    return;
   } else {
     message.channel.send("Command input error! Please re-enter the right syntax!");
   }
@@ -116,6 +113,7 @@ async function execute(message, serverQueue) {
 function play(guild, song) {
     const serverQueue = queue.get(guild.id);
     if (!song) {
+	serverQueue.voiceChannel.leave();
         queue.delete(guild.id);
         return;
     }
@@ -170,10 +168,6 @@ function stop(message, serverQueue) {
 function nowplaying(messnage, serverQueue) {
 	if (!serverQueue) return message.channel.send('There is nothing playing.');
 	return message.channel.send(`Now playing: ${serverQueue.songs[0].title}`);
-}
-
-function leave(message, serverQueue){
-    serverQueue.voiceChannel.leave();
 }
 
 client.login(token);
