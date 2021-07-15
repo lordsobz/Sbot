@@ -46,7 +46,7 @@ client.on("message", async message => {
     nowplaying(message, serverQueue);
     return;
   } else {
-    message.channel.send("Command input error! Please re-enter the right syntax!");
+    message.channel.send("Sai lệnh bạn êy! Biết gõ phím không đếy??");
   }
 });
  
@@ -57,12 +57,12 @@ async function execute(message, serverQueue) {
     const voiceChannel = message.member.voice.channel;
     if (!voiceChannel)
         return message.channel.send(
-        "You need to be in a voice channel to play music!"
+        "Chưa vào phòng voicechat mà xài lệnh? T phải đi đâu bây giờ?? Vào room voicechat đi!"
         );
     const permissions = voiceChannel.permissionsFor(message.client.user);
     if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
         return message.channel.send(
-        "I need the permissions to join and speak in your voice channel!"
+        "Bố m không có quyền nói trong này! Cấp quyền cho mình cái bạn êy!"
         );
     }
 
@@ -129,44 +129,44 @@ function play(guild, song) {
 }
 
 function pause(message, serverQueue) {    
-	if (!message.member.voice.channel) return message.channel.send('You have to be in a voice channel to pause the music!');
-	if (!serverQueue) return message.channel.send('There is no song that I could pause!');
-	if (serverQueue.connection.dispatcher.paused) return message.channel.send('Song already paused!');
+	if (!message.member.voice.channel) return message.channel.send("Chưa vào phòng voicechat mà xài lệnh? T phải đi đâu bây giờ?? Vào room voicechat đi!");
+	if (!serverQueue) return message.channel.send('Làm đel gì có nhạc mà tạm dừng! Ngáo à?');
+	if (serverQueue.connection.dispatcher.paused) return message.channel.send('Dừng rồi!');
 	serverQueue.connection.dispatcher.pause();
 }
 
 function resume(message, serverQueue){
-    if (!message.member.voice.channel) return message.channel.send('You have to be in a voice channel to resume the music!');
-	if (!serverQueue) return message.channel.send('There is no song that I could resume!');
-	if (!serverQueue.connection.dispatcher.paused) return message.channel.send('Song already resumed!');
+    if (!message.member.voice.channel) return message.channel.send("Chưa vào phòng voicechat mà xài lệnh? T phải đi đâu bây giờ?? Vào room voicechat đi!");
+	if (!serverQueue) return message.channel.send('Làm gì có nhạc mà tiếp tục');
+	if (!serverQueue.connection.dispatcher.paused) return message.channel.send('Không thấy nhạc đang phát à!?');
 	serverQueue.connection.dispatcher.resume();
 }
 
 function skip(message, serverQueue) {
     if (!message.member.voice.channel)
         return message.channel.send(
-        "You have to be in a voice channel to stop the music!"
+        "Vào room voice chat đi rôi dùng lệnh nhá bạn"
         );
     if (!serverQueue)
-        return message.channel.send("There is no song to skip!");
+        return message.channel.send("Làm gì có bài nào tiếp theo đâu mà skip");
     serverQueue.connection.dispatcher.end();
 }
 
 function stop(message, serverQueue) {
     if (!message.member.voice.channel)
         return message.channel.send(
-        "You have to be in a voice channel to stop the music!"
+        "Vào room voice chat đi rôi dùng lệnh nhá bạn"
         );
         
     if (!serverQueue)
-        return message.channel.send("There is no song to stop!");
+        return message.channel.send('Làm đel gì có nhạc mà tạm dừng! Ngáo à?');
         
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end();
 }
 
 function nowplaying(messnage, serverQueue) {
-	if (!serverQueue) return message.channel.send('There is nothing playing.');
+	if (!serverQueue) return message.channel.send("Chả có gì đang phát cả");
 	return message.channel.send(`Now playing: ${serverQueue.songs[0].title}`);
 }
 
