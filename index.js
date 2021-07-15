@@ -138,7 +138,7 @@ function pause(message, serverQueue) {
 function resume(message, serverQueue){
     if (!message.member.voice.channel) return message.channel.send("Chưa vào phòng voicechat mà xài lệnh? T phải đi đâu bây giờ?? Vào room voicechat đi!");
 	if (!serverQueue) return message.channel.send('Làm gì có nhạc mà tiếp tục');
-	if (!serverQueue.connection.dispatcher.paused) return message.channel.send('Không thấy nhạc đang phát à!?');
+	if (!serverQueue.connection.dispatcher.paused) return message.channel.send('Không thấy nhạc đang phát à? Lại chơi đồ rồi!');
 	serverQueue.connection.dispatcher.resume();
 }
 
